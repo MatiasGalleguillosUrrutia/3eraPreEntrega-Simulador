@@ -54,7 +54,7 @@ function inicializarSelectores() {
             div.classList.add('col-12', 'col-md-4', 'p-1');
             const botonId = `boton-${i}`;
             div.innerHTML = `
-                <div class="card border-1 ">
+                <div class="card border-1 text-center">
                     <label class="pb-3 text-center">¿Qué clase quieres tomar?</label>
                     <select class="form-select cursoSelect pb-3 text-center" aria-label="Default select example">
                         <option selected>Elige tu clase</option>
@@ -64,8 +64,9 @@ function inicializarSelectores() {
                     <select class="form-select fechaSelect text-center" aria-label="Default select example">
                         <option selected>Elige tu fecha</option>
                     </select>
-                    <button class="btn btn-secondary" id="${botonId}" onclick="cambiarEstado('${botonId}')">Agregar</button>
+                    <button class="btn btn-secondary btn-md mx-auto d-block m-2" id="${botonId}" onclick="cambiarEstado('${botonId}')">Agregar</button>
                 </div>
+
             `;
             cantidad_clases.appendChild(div);
         }
@@ -76,6 +77,7 @@ function inicializarSelectores() {
         actualizarTablaCarrito();
     });
 }
+
 
 function cambiarEstado(botonId) {
     const boton = document.getElementById(botonId);
