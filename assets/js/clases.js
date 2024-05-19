@@ -1,3 +1,4 @@
+<<<<<<< HEAD:assets/js/scripts_V4.js
 // alert("Bienvenido a Academia de Danza. Si quieres realizar compras de clases favor ingresar la cantidad de clases que quiere tomar. Por alta demanda, queda disponible \
 // compras de 1 clase o 2 clases.")
 
@@ -29,6 +30,8 @@ fetch('../productos.json')
 
 
 
+=======
+>>>>>>> Javascripts-V5:assets/js/clases.js
 //========================UTILIZAMOS LOS DATOS DEL FETCH PARA AGREGARLOS A UN SELECT OPTION================
 
 function cargarClases() {
@@ -44,7 +47,6 @@ function cargarClases() {
 
         
     });
-
 
     // Evento de cambio en los selectores de cursos
     selectoresClases.forEach((selector, index) => {
@@ -68,6 +70,7 @@ function cargarClases() {
         // Agregar la ruta de la imagen a cada tarjeta
         const tarjeta = selector.closest('.card');
         const imagen = tarjeta.querySelector('img');
+
         if (cursoSeleccionado && cursoSeleccionado.imagen) {
             imagen.src = cursoSeleccionado.imagen;
         } else {
@@ -75,11 +78,20 @@ function cargarClases() {
         }
 
         });
+
+        
     });
 }
 
+<<<<<<< HEAD:assets/js/scripts_V4.js
 //=======A PARTIR DE DATOS DEL HTML LOGRAMOS TENER UN VALUE Y apartir de la cantidad creamos diferentes div================
+=======
 
+//=======A PARTIR DE DATOS DEL HTML LOGRAMOS TENER UN VALUE ///Y apartir de la cantidad creamos div================
+>>>>>>> Javascripts-V5:assets/js/clases.js
+
+
+function inicializarSelectores() {
 // Agrega un evento 'change' al elemento select de la cantidad de clases
 const selectElement = document.querySelector('.form-select');
 const cantidad_clases = document.querySelector("#columnas-CantidadClases");
@@ -125,6 +137,7 @@ selectElement.addEventListener('change', function() {
     actualizarTablaCarrito()
 });
 
+<<<<<<< HEAD:assets/js/scripts_V4.js
 
 
 //======================Carrito====================================================
@@ -193,6 +206,8 @@ function actualizarTablaCarrito() {
     filaTotal.insertCell(3).textContent = isNaN(total) ? 'Error en cálculo' : total;
     filaTotal.insertCell(4);
     
+=======
+>>>>>>> Javascripts-V5:assets/js/clases.js
 }
 
 //===================================CAMBIAMOS EL ESTADO DEL BOTON AGREGAR O LISTO==========================================================
@@ -204,13 +219,20 @@ function cambiarEstado(botonId) {
     const select1 = boton.parentNode.querySelector(".cursoSelect");
     const select2 = boton.parentNode.querySelector(".fechaSelect");
 
-    if (boton.innerHTML === "Agregar") {
-        boton.innerHTML = "Listo";
-        boton.classList.remove('btn', 'btn-secondary');
-        boton.classList.add('btn', 'btn-success');
-        select1.disabled = true;
-        select2.disabled = true;
+     //======================================COMENZAMOS A UTILIZAR OPERADORES TERNARIOS=====================================
+    const esAgregar = boton.innerHTML === "Agregar";
 
+
+    boton.innerHTML = esAgregar  ? "Listo" : "Agregar";
+
+    boton.classList.toggle('btn-secondary',!esAgregar);
+    boton.classList.toggle('btn-success',esAgregar);
+    select1.disabled = esAgregar;
+    select2.disabled = esAgregar;
+
+   
+    if (esAgregar) {
+        
         const IDClaseSeleccionada = select1.value;
         const TituloClaseSeleccionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).titulo;
         const RutaImagenClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).imagen;
@@ -228,11 +250,7 @@ function cambiarEstado(botonId) {
         });
         actualizarTablaCarrito();  // Actualiza la tabla cada vez que se agrega un ítem
     } else {
-        boton.innerHTML = "Agregar";
-        boton.classList.remove('btn', 'btn-success');
-        boton.classList.add('btn', 'btn-secondary');
-        select1.disabled = false;
-        select2.disabled = false;
+       
 
         // Para eliminar, necesitarás encontrar el ID correcto con un método similar
         carrito.eliminarItem(select1.value); // Aquí necesitarás ajustar cómo manejas el ID único al eliminar
@@ -240,6 +258,7 @@ function cambiarEstado(botonId) {
     }
 }
 
+<<<<<<< HEAD:assets/js/scripts_V4.js
 //===============================UNA VEZ CARGADA LA PAGINA COMPLETA SE PUEDE APRETAR EL BOTON VACIAR CARRITO=====================================
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -296,3 +315,8 @@ function agregarAlCarrito(productoId) {
     });
   }
   
+=======
+function inicializarEventos() {
+    inicializarSelectores();
+}
+>>>>>>> Javascripts-V5:assets/js/clases.js
