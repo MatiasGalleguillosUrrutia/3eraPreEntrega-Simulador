@@ -4,7 +4,7 @@
 let Array_Clases;
 
 function cargarClasesDesdeJSON() {
-    fetch('productos.json')
+    fetch('productos.json')  // aqui estamos probando cual ruta toma el github
       .then(response => {
         if (!response.ok) {
           throw new Error('Error al cargar el archivo');
