@@ -132,15 +132,17 @@ selectElement.addEventListener('change', function() {
 // Asegúrate de que las funciones como cambiarEstado, actualizarTablaCarrito, etc., estén definidas fuera pero dentro del alcance accesible.
 class Carrito {
     constructor() {
-        this.items = [];
+        this.items = this.cargarCarrito();
     }
 
     agregarItem(item) {
         this.items.push(item);
+        this.guardarCarrito();
     }
 
     eliminarItem(itemId) {
         this.items = this.items.filter(item => item.id !== itemId);
+        this.guardarCarrito();
     }
 
     obtenerItems() {
@@ -149,6 +151,7 @@ class Carrito {
 
     vaciar() {
         this.items = [];
+        this.guardarCarrito();
     }
 
     calcularTotal() {
@@ -263,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function () {
         actualizarTablaCarrito();
     });
 
+    actualizarTablaCarrito(); // Cargar la tabla con los datos del carrito al cargar la página
     // Agregar eventos a otros botones de acción como se necesite
 });
 
