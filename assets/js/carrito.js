@@ -80,3 +80,33 @@ function actualizarTablaCarrito() {
     filaTotal.insertCell(4);
     
 }
+
+function inicializarCarrito() {
+    document.getElementById('vaciar-carrito').addEventListener('click', function (e) {
+        e.preventDefault();
+        carrito.vaciar();
+        actualizarTablaCarrito();
+    });
+
+    actualizarTablaCarrito(); // Cargar la tabla con los datos del carrito al cargar la página
+}
+
+
+//==============================================AQUI ASIGNAMOS PRECIOS A LOS PACKS.======================================================================
+function calcularDescuento(items) {
+    const cantidad = items.length;
+    if (cantidad === 2) {
+        return 15000;  
+    }
+    if (cantidad === 4) {
+        return 29000;  
+    }
+    if (cantidad === 6) {
+        return 43000; 
+    }
+    if (cantidad === 8) {
+        return 57000; 
+    }
+    return 0; // No hay descuento
+}
+

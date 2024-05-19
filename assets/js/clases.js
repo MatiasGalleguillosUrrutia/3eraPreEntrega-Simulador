@@ -14,7 +14,6 @@ function cargarClases() {
         
     });
 
-
     // Evento de cambio en los selectores de cursos
     selectoresClases.forEach((selector, index) => {
         selector.addEventListener('change', () => {
@@ -50,6 +49,8 @@ function cargarClases() {
 
 //=======A PARTIR DE DATOS DEL HTML LOGRAMOS TENER UN VALUE ///Y apartir de la cantidad creamos div================
 
+
+function inicializarSelectores() {
 // Agrega un evento 'change' al elemento select de la cantidad de clases
 const selectElement = document.querySelector('.form-select');
 const cantidad_clases = document.querySelector("#columnas-CantidadClases");
@@ -94,3 +95,54 @@ selectElement.addEventListener('change', function() {
     carrito.vaciar()
     actualizarTablaCarrito()
 });
+
+}
+
+//===================================CAMBIAMOS EL ESTADO DEL BOTON AGREGAR O LISTO==========================================================
+
+let itemCounter = 0; // Inicializas un contador fuera de la función
+
+function cambiarEstado(botonId) {
+    const boton = document.getElementById(botonId);
+    const select1 = boton.parentNode.querySelector(".cursoSelect");
+    const select2 = boton.parentNode.querySelector(".fechaSelect");
+
+    if (boton.innerHTML === "Agregar") {
+        boton.innerHTML = "Listo";
+        boton.classList.remove('btn', 'btn-secondary');
+        boton.classList.add('btn', 'btn-success');
+        select1.disabled = true;
+        select2.disabled = true;
+
+        const IDClaseSeleccionada = select1.value;
+        const TituloClaseSeleccionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).titulo;
+        const RutaImagenClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).imagen;
+        const PrecioClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).precio;
+
+        // Agregamos un contador al ID para hacerlo único
+        const uniqueItemId = IDClaseSeleccionada + '-' + itemCounter++;
+        
+        carrito.agregarItem({
+            "id": uniqueItemId, // Usamos el ID único
+            "titulo": TituloClaseSeleccionada,
+            "fecha": select2.value,
+            "imagen": RutaImagenClaseSeleecionada,
+            "precio": PrecioClaseSeleecionada
+        });
+        actualizarTablaCarrito();  // Actualiza la tabla cada vez que se agrega un ítem
+    } else {
+        boton.innerHTML = "Agregar";
+        boton.classList.remove('btn', 'btn-success');
+        boton.classList.add('btn', 'btn-secondary');
+        select1.disabled = false;
+        select2.disabled = false;
+
+        // Para eliminar, necesitarás encontrar el ID correcto con un método similar
+        carrito.eliminarItem(select1.value); // Aquí necesitarás ajustar cómo manejas el ID único al eliminar
+        actualizarTablaCarrito();  // Actualiza la tabla cada vez que se elimina un ítem
+    }
+}
+
+function inicializarEventos() {
+    inicializarSelectores();
+}
