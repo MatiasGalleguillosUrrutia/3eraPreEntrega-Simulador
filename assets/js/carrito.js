@@ -1,3 +1,12 @@
+//MENU
+
+// 1.- Carrito()
+// 2.- funcion ActualizarTablaCarrito()
+// 3.- funcion inicializarCarrito()
+// 4.- funcion calcularDescuento(items)
+
+
+
 //======================Carrito====================================================
 
 // Asegúrate de que las funciones como cambiarEstado, actualizarTablaCarrito, etc., estén definidas fuera pero dentro del alcance accesible.

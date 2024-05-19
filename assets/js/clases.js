@@ -36,6 +36,7 @@ function cargarClases() {
         // Agregar la ruta de la imagen a cada tarjeta
         const tarjeta = selector.closest('.card');
         const imagen = tarjeta.querySelector('img');
+
         if (cursoSeleccionado && cursoSeleccionado.imagen) {
             imagen.src = cursoSeleccionado.imagen;
         } else {
@@ -43,6 +44,8 @@ function cargarClases() {
         }
 
         });
+
+        
     });
 }
 
@@ -107,13 +110,20 @@ function cambiarEstado(botonId) {
     const select1 = boton.parentNode.querySelector(".cursoSelect");
     const select2 = boton.parentNode.querySelector(".fechaSelect");
 
-    if (boton.innerHTML === "Agregar") {
-        boton.innerHTML = "Listo";
-        boton.classList.remove('btn', 'btn-secondary');
-        boton.classList.add('btn', 'btn-success');
-        select1.disabled = true;
-        select2.disabled = true;
+     //======================================COMENZAMOS A UTILIZAR OPERADORES TERNARIOS=====================================
+    const esAgregar = boton.innerHTML === "Agregar";
 
+
+    boton.innerHTML = esAgregar  ? "Listo" : "Agregar";
+
+    boton.classList.toggle('btn-secondary',!esAgregar);
+    boton.classList.toggle('btn-success',esAgregar);
+    select1.disabled = esAgregar;
+    select2.disabled = esAgregar;
+
+   
+    if (esAgregar) {
+        
         const IDClaseSeleccionada = select1.value;
         const TituloClaseSeleccionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).titulo;
         const RutaImagenClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).imagen;
@@ -131,11 +141,7 @@ function cambiarEstado(botonId) {
         });
         actualizarTablaCarrito();  // Actualiza la tabla cada vez que se agrega un ítem
     } else {
-        boton.innerHTML = "Agregar";
-        boton.classList.remove('btn', 'btn-success');
-        boton.classList.add('btn', 'btn-secondary');
-        select1.disabled = false;
-        select2.disabled = false;
+       
 
         // Para eliminar, necesitarás encontrar el ID correcto con un método similar
         carrito.eliminarItem(select1.value); // Aquí necesitarás ajustar cómo manejas el ID único al eliminar
