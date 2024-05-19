@@ -23,13 +23,13 @@ function cargarClases() {
             const fechaSelect = selectoresFechas[index];
             fechaSelect.innerHTML = '';
 
-            if (cursoSeleccionado && cursoSeleccionado.fechas) {
-                cursoSeleccionado.fechas.forEach(fecha => {
-                    fechaSelect.add(new Option(fecha, fecha));
-                });
-            } else {
-                fechaSelect.add(new Option('No hay fechas disponibles', ''));
-            }
+           // ==============================Agregando Operadores Ternarios.============================
+                
+            cursoSeleccionado && cursoSeleccionado.fechas
+            ? cursoSeleccionado.fechas.forEach(fecha => fechaSelect.add(new Option(fecha, fecha)))
+            : fechaSelect.add(new Option('No hay fechas disponibles', ''));
+
+            // ==============================Agregando Operadores Ternarios.============================
 
             const tarjeta = selector.closest('.card');
             const imagen = tarjeta.querySelector('img');
@@ -46,12 +46,9 @@ function inicializarSelectores() {
         const valorSeleccionado = parseInt(selectElement.value);
         cantidad_clases.innerHTML = "";
 
-        if (valorSeleccionado === 0) {
-            cantidad_clases.style.display = "none";
-        } else {
-            cantidad_clases.style.display = "";
-        }
-
+// ==============================Agregando Operadores Ternarios.============================
+        cantidad_clases.style.display = (valorSeleccionado === 0) ? "none" : "";
+// ==============================Agregando Operadores Ternarios.============================
         for (let i = 0; i < valorSeleccionado; i++) {
             const div = document.createElement("div");
             div.classList.add('col-12', 'col-md-4', 'p-1');
@@ -88,34 +85,28 @@ function cambiarEstado(botonId) {
     const IDClaseSeleccionada = select1.value;
     const uniqueItemId = IDClaseSeleccionada + '-' + botonId; // Agregar botonId para asegurar unicidad
 
-    if (boton.innerHTML === "Agregar") {
-        boton.innerHTML = "Listo";
-        boton.classList.remove('btn-secondary');
-        boton.classList.add('btn-success');
-        select1.disabled = true;
-        select2.disabled = true;
+    // ==============================Agregando Operadores Ternarios.============================
 
-        const TituloClaseSeleccionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).titulo;
-        const RutaImagenClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).imagen;
-        const PrecioClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).precio;
 
+    boton.innerHTML = (boton.innerHTML === "Agregar") ? "Listo" : "Agregar";
+    boton.classList.toggle('btn-secondary');
+    boton.classList.toggle('btn-success');
+    select1.disabled = !select1.disabled;
+    select2.disabled = !select2.disabled;
+// ==============================Agregando Operadores Ternarios.============================
+
+    if (boton.innerHTML === "Listo") {
+        const curso = Array_Clases.find(curso => curso.id === IDClaseSeleccionada);
         carrito.agregarItem({
             "id": uniqueItemId, // Usamos el ID único
-            "titulo": TituloClaseSeleccionada,
+            "titulo": curso.titulo,
             "fecha": select2.value,
-            "imagen": RutaImagenClaseSeleecionada,
-            "precio": PrecioClaseSeleecionada
+            "imagen": curso.imagen,
+            "precio": curso.precio
         });
     } else {
-        boton.innerHTML = "Agregar";
-        boton.classList.remove('btn-success');
-        boton.classList.add('btn-secondary');
-        select1.disabled = false;
-        select2.disabled = false;
-
         carrito.eliminarItem(uniqueItemId); // Eliminar usando el ID único
     }
-
     actualizarTablaCarrito(); // Actualizar la tabla cada vez que se agrega o elimina un ítem
 }
 
