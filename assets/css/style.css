@@ -1,0 +1,57 @@
+.btn-secondary {
+  background-color: #cfcfcf; /* Gris */
+  color: #000000; /* Texto blanco */
+}
+
+.btn-success {
+    background-color: #1ae449; /* Verde */
+    color: #000000; /* Texto blanco */
+}
+
+.btn-secondary:hover {
+  background-color: #d3d4d4; /* Gris */
+  color: rgb(0, 0, 0)
+}
+
+.btn-success:hover {
+  background-color: #1ae449; /* Verde */
+  color: white
+}
+
+.sub-menu {
+  position: relative;
+}
+
+.sub-menu #carrito {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1;
+  background-color: #4E4B5076;
+  padding: 20px;
+  min-height: auto;
+  width: 500px;
+  backdrop-filter: blur(10px);
+}
+
+.sub-menu:hover #carrito {
+  display: block;
+}
+
+table {width:100%}
+
+th,td {
+  color:white
+}
+
+
+.fs-extra-small {
+  font-size: 0.7rem;  /* O el tamaño que prefieras */
+}
+
+.fs-extra{
+  font-size: 0.8rem;  /* O el tamaño que prefieras */
+}
+
+
