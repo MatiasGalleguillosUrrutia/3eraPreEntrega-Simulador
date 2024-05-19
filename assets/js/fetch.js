@@ -4,7 +4,7 @@
 let Array_Clases;
 
 function cargarClasesDesdeJSON() {
-    fetch('3eraPreEntrega-Simulador/productos.json')
+    fetch('productos.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Error al cargar el archivo');
