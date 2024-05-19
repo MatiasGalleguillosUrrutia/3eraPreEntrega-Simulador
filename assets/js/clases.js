@@ -1,11 +1,9 @@
-//MENU
+// //MENU
 
-// 1.- cargarClases()
-// 2.- funcion inicializarSelectores()
-// 3.- cambiarEstado(botonId)
-// 4.- inicializarEventos()
-
-
+// // 1.- cargarClases()
+// // 2.- funcion inicializarSelectores()
+// // 3.- cambiarEstado(botonId)
+// // 4.- inicializarEventos()
 
 function cargarClases() {
     const selectoresClases = document.querySelectorAll('.cursoSelect');
@@ -35,11 +33,7 @@ function cargarClases() {
 
             const tarjeta = selector.closest('.card');
             const imagen = tarjeta.querySelector('img');
-            if (cursoSeleccionado && cursoSeleccionado.imagen) {
-                imagen.src = cursoSeleccionado.imagen;
-            } else {
-                imagen.src = '';
-            }
+            imagen.src = cursoSeleccionado && cursoSeleccionado.imagen ? cursoSeleccionado.imagen : './assets/img/default_image.png';
         });
     });
 }
@@ -86,45 +80,43 @@ function inicializarSelectores() {
     });
 }
 
-let itemCounter = 0;
-
 function cambiarEstado(botonId) {
     const boton = document.getElementById(botonId);
     const select1 = boton.parentNode.querySelector(".cursoSelect");
     const select2 = boton.parentNode.querySelector(".fechaSelect");
 
+    const IDClaseSeleccionada = select1.value;
+    const uniqueItemId = IDClaseSeleccionada + '-' + botonId; // Agregar botonId para asegurar unicidad
+
     if (boton.innerHTML === "Agregar") {
         boton.innerHTML = "Listo";
-        boton.classList.remove('btn', 'btn-secondary');
-        boton.classList.add('btn', 'btn-success');
+        boton.classList.remove('btn-secondary');
+        boton.classList.add('btn-success');
         select1.disabled = true;
         select2.disabled = true;
 
-        const IDClaseSeleccionada = select1.value;
         const TituloClaseSeleccionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).titulo;
         const RutaImagenClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).imagen;
         const PrecioClaseSeleecionada = Array_Clases.find(curso => curso.id === IDClaseSeleccionada).precio;
 
-        const uniqueItemId = IDClaseSeleccionada + '-' + itemCounter++;
-
         carrito.agregarItem({
-            "id": uniqueItemId,
+            "id": uniqueItemId, // Usamos el ID único
             "titulo": TituloClaseSeleccionada,
             "fecha": select2.value,
             "imagen": RutaImagenClaseSeleecionada,
             "precio": PrecioClaseSeleecionada
         });
-        actualizarTablaCarrito();
     } else {
         boton.innerHTML = "Agregar";
-        boton.classList.remove('btn', 'btn-success');
-        boton.classList.add('btn', 'btn-secondary');
+        boton.classList.remove('btn-success');
+        boton.classList.add('btn-secondary');
         select1.disabled = false;
         select2.disabled = false;
 
-        carrito.eliminarItem(select1.value);
-        actualizarTablaCarrito();
+        carrito.eliminarItem(uniqueItemId); // Eliminar usando el ID único
     }
+
+    actualizarTablaCarrito(); // Actualizar la tabla cada vez que se agrega o elimina un ítem
 }
 
 function inicializarEventos() {
