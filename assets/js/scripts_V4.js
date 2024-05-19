@@ -78,7 +78,7 @@ function cargarClases() {
     });
 }
 
-//=======A PARTIR DE DATOS DEL HTML LOGRAMOS TENER UN VALUE ///Y apartir de la cantidad creamos div================
+//=======A PARTIR DE DATOS DEL HTML LOGRAMOS TENER UN VALUE Y apartir de la cantidad creamos diferentes div================
 
 // Agrega un evento 'change' al elemento select de la cantidad de clases
 const selectElement = document.querySelector('.form-select');
@@ -129,7 +129,6 @@ selectElement.addEventListener('change', function() {
 
 //======================Carrito====================================================
 
-// Asegúrate de que las funciones como cambiarEstado, actualizarTablaCarrito, etc., estén definidas fuera pero dentro del alcance accesible.
 class Carrito {
     constructor() {
         this.items = [];
@@ -273,3 +272,27 @@ function calcularDescuento(items) {
     return 0; // No hay descuento
 }
 
+
+
+
+//=====================================Funcion para guardar la lista del carrito en el Local Storage==================================
+// Añadir un producto al carrito
+function agregarAlCarrito(productoId) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.push(productoId);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  }
+  
+  // Recuperar los productos del carrito
+  function obtenerCarrito() {
+    return JSON.parse(localStorage.getItem('carrito')) || [];
+  }
+  
+  // Mostrar los productos del carrito al usuario
+  function mostrarCarrito() {
+    let carrito = obtenerCarrito();
+    carrito.forEach(productoId => {
+      // Lógica para mostrar cada producto
+    });
+  }
+  
