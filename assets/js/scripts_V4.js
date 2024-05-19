@@ -1,7 +1,7 @@
 // alert("Bienvenido a Academia de Danza. Si quieres realizar compras de clases favor ingresar la cantidad de clases que quiere tomar. Por alta demanda, queda disponible \
 // compras de 1 clase o 2 clases.")
 
-
+//HOLA
 
 //==========================REALIZAMOS UN FETCH PARA OBTENER LA LISTA DE PRODUCTOS EN JSON================
 let Array_Clases; // Declara la variable fuera del fetch
