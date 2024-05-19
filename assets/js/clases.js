@@ -127,6 +127,6 @@ function cambiarEstado(botonId) {
     }
 }
 
-// function inicializarEventos() {
-//     inicializarSelectores();
-// }
+function inicializarEventos() {
+    inicializarSelectores();
+}
