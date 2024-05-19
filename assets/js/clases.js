@@ -1,3 +1,12 @@
+//MENU
+
+// 1.- cargarClases()
+// 2.- funcion inicializarSelectores()
+// 3.- cambiarEstado(botonId)
+// 4.- inicializarEventos()
+
+
+
 function cargarClases() {
     const selectoresClases = document.querySelectorAll('.cursoSelect');
     const selectoresFechas = document.querySelectorAll('.fechaSelect');
@@ -118,6 +127,6 @@ function cambiarEstado(botonId) {
     }
 }
 
-function inicializarEventos() {
-    inicializarSelectores();
-}
+// function inicializarEventos() {
+//     inicializarSelectores();
+// }

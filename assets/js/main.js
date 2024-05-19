@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     inicializarCarrito();
-    inicializarEventos();
+    inicializarSelectores();
     cargarClasesDesdeJSON();
 });
