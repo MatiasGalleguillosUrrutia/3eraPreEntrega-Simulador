@@ -156,6 +156,17 @@ class Carrito {
         const descuento = calcularDescuento(this.items);
         return descuento;
     }
+
+    // ===========================Aqui utilizamos LOCAL STORAGE===========================
+    guardarCarrito() {
+        localStorage.setItem('carrito', JSON.stringify(this.items));
+    }
+
+    cargarCarrito() {
+        return JSON.parse(localStorage.getItem('carrito')) || [];
+    }
+
+    
 }
 
 const carrito = new Carrito();
