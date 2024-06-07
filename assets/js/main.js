@@ -3,3 +3,5 @@ document.addEventListener('DOMContentLoaded', function () {
     inicializarEventos();
     cargarClasesDesdeJSON();
 });
+
+// main.js

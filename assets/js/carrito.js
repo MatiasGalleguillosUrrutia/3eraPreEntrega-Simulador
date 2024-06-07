@@ -1,21 +1,56 @@
-//MENU
+// carrito.js
 
-// 1.- Carrito()
-// 2.- funcion ActualizarTablaCarrito()
-// 3.- funcion inicializarCarrito()
-// 4.- funcion calcularDescuento(items)
-
-
-
-//======================Carrito====================================================
 class Carrito {
     constructor() {
         this.items = this.cargarCarrito();
     }
 
+    async agregarItemDesdeServidor(id) {
+        try {
+            const productos = await cargarProductos();
+            const item = productos.find(producto => producto.id === id);
+            if (item) {
+                this.items.push(item);
+                this.guardarCarrito();
+                
+                // Mostrar un pop-up de confirmación
+                Swal.fire({
+                    title: 'Producto agregado',
+                    text: `${item.titulo} ha sido añadido al carrito.`,
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+
+                actualizarTablaCarrito();
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Producto no encontrado.',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        } catch (error) {
+            Swal.fire({
+                title: 'Error',
+                text: 'No se pudo cargar los productos.',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+
     agregarItem(item) {
         this.items.push(item);
         this.guardarCarrito();
+        
+        // Mostrar un pop-up de confirmación
+        Swal.fire({
+            title: 'Producto agregado',
+            text: `${item.titulo} ha sido añadido al carrito.`,
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
     }
 
     eliminarItem(itemId) {
@@ -108,3 +143,9 @@ function calcularDescuento(items) {
     }
     return 0; // No hay descuento
 }
+
+
+document.getElementById('agregar-desde-servidor').addEventListener('click', () => {
+    const idProducto = 1; // ID de ejemplo
+    carrito.agregarItemDesdeServidor(idProducto);
+});
